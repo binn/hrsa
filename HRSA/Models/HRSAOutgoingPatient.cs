@@ -71,7 +71,7 @@ namespace HRSA.Models
 
             var patient = new HRSAOutgoingPatient()
             {
-                BillingTIN = "811287992",
+                BillingTIN = System.IO.File.ReadAllText("TIN.txt"),
                 FirstName = src.FirstName,
                 LastName = src.LastName,
                 ServiceType = "Professional",
