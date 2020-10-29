@@ -1,9 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRSA.Models
 {
@@ -66,26 +62,25 @@ namespace HRSA.Models
         public static HRSAOutgoingPatient From(HealPatient src)
         {
             var address = src.Address.Split(',').Select(x => x.Trim()).ToArray();
-            string[] stzip = address[2].Split('-');
-            Console.WriteLine(string.Join("| ", address));
+            string[] stzip = address[2].Split('-'); // address requires a certain format
 
             var patient = new HRSAOutgoingPatient()
             {
-                BillingTIN = System.IO.File.ReadAllText("TIN.txt"),
+                BillingTIN = Global.MasterTIN,
                 FirstName = src.FirstName,
                 LastName = src.LastName,
                 ServiceType = "Professional",
                 DateOfService = src.DateOfService,
                 DateOfAdmission = src.DateOfService,
                 DateOfDischarge = src.DateOfService,
-                MiddleInitial = "",
+                MiddleInitial = string.Empty,
                 IDType = src.DL == "No ID" ? "No ID" : (src.DL == "Non-US ID" ? "No ID" : "State ID"),
-                IDNumber = src.DL == "No ID" ? "" : (src.DL == "Non-US ID" ? "" : src.DL),
+                IDNumber = src.DL == "No ID" ? string.Empty : (src.DL != "Non-US ID" ? src.DL : string.Empty),
                 DateOfBirth = src.DateOfBirth,
                 AccountNumber = src.AccountNumber,
                 Gender = src.Gender,
                 AddressLine1 = address[0],
-                AddressLine2 = "",
+                AddressLine2 = string.Empty,
                 City = address[1],
                 State = stzip[0],
                 Zip = stzip[1]
