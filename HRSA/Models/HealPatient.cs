@@ -47,5 +47,28 @@ namespace HRSA.Models
         [Index(5)]
         [Name("G")]
         public string Gender { get; set; }
+
+        public static HealPatient From(string dos, ECWOutgoingPatient src)
+        {
+            string address = src.Address + ", " + src.City + ", " + src.State + "-" + src.ZipCode;
+            string[] names = src.PatientName.Split(',');
+
+            var patient = new HealPatient()
+            {
+                Address = address,
+                SubmittedDate = string.Empty,
+                SubscriberId = string.Empty,
+                DateOfService = dos,
+                AccountNumber = src.AccountNumber,
+                ActiveDate = string.Empty,
+                DateOfBirth = src.DateOfBirth,
+                DL = string.Empty,
+                Gender = src.DateOfBirth,
+                LastName = names[0],
+                FirstName = names[1]
+            };
+
+            return patient;
+        }
     }
 }

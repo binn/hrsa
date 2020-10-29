@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSV.cs" />
     <Compile Include="ECWParse.cs">
       <SubType>Form</SubType>
     </Compile>
