@@ -49,6 +49,7 @@ namespace HRSA
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "CSV Fies (*.csv)|*.csv|All files (*.*)|*.*";
             var result = dialog.ShowDialog();
+
             if(result == DialogResult.OK)
             {
                 if(!Directory.Exists(Path.GetDirectoryName(dialog.FileName)))
@@ -60,9 +61,9 @@ namespace HRSA
                 var incomingPatients = CSV.Read<ECWIncomingPatient>(ecwRecordBox.Text);
                 var records = CSV.Read<ECWGenderPatient>(ecwDataBox.Text);
                 var patients = incomingPatients.Select(x => new ECWOutgoingPatient(x, records.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)));
-                
-             //   if (patients.Count() != incomingPatients.Count())
-             //      MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (patients.Count() != incomingPatients.Count())
+                   MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (!File.Exists(dialog.FileName))
                     File.Create(dialog.FileName).Close();

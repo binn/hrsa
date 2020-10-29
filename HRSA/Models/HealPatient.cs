@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HRSA.Models
 {
@@ -63,7 +64,7 @@ namespace HRSA.Models
                 ActiveDate = string.Empty,
                 DateOfBirth = src.DateOfBirth,
                 DL = string.Empty,
-                Gender = src.DateOfBirth,
+                Gender = src.Gender,
                 LastName = names[0],
                 FirstName = names[1]
             };
