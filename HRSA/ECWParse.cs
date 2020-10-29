@@ -40,11 +40,14 @@ namespace HRSA
 
         private void generateBtn_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(dosBox.Text) || !DateTime.TryParse(dosBox.Text, out _))
+            if (string.IsNullOrWhiteSpace(dosBox.Text) || !DateTime.TryParse(dosBox.Text, out _))
+            {
                 MessageBox.Show("Date of Service is invalid or empty. A valid Date of Service is required before continuing", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                return;
+            }
+           
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "*.csv";
+            dialog.Filter = "CSV Fies (*.csv)|*.csv|All files (*.*)|*.*";
             var result = dialog.ShowDialog();
             if(result == DialogResult.OK)
             {
@@ -58,8 +61,8 @@ namespace HRSA
                 var records = CSV.Read<ECWGenderPatient>(ecwDataBox.Text);
                 var patients = incomingPatients.Select(x => new ECWOutgoingPatient(x, records.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)));
                 
-                if (patients.Count() != incomingPatients.Count())
-                    MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             //   if (patients.Count() != incomingPatients.Count())
+             //      MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 if (!File.Exists(dialog.FileName))
                     File.Create(dialog.FileName).Close();
