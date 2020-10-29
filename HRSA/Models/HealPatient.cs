@@ -28,11 +28,11 @@ namespace HRSA.Models
         [Name("Active Date")]
         public string ActiveDate { get; set; }
 
-        [Name("DOS 1")]
-        public string DateOfService1 { get; set; }
+        [Name("DOS")]
+        public string DateOfService { get; set; }
 
-        [Name("DOS 2")]
-        public string DateOfService2 { get; set; }
+        [Name("Acc #")]
+        public string AccountNumber { get; set; }
 
         [Name("G")]
         public string Gender { get; set; }
