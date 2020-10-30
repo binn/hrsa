@@ -42,8 +42,8 @@ namespace HRSA.Models
 
         public ECWIncomingPatient Clean()
         {
-            this.ZipCode = this.ZipCode?.Split('-')[0];
-            this.State = this.State?.ToUpper();
+            this.ZipCode = this.ZipCode?.Trim()?.Split('-')[0];
+            this.State = this.State?.ToUpper()?.Trim();
             this.AddressLine1 = this.AddressLine1?.Trim() + (string.IsNullOrWhiteSpace(this.AddressLine2) ? string.Empty : " " + this.AddressLine2.Trim());
 
             return this;

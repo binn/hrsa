@@ -1,5 +1,4 @@
 ﻿using CsvHelper.Configuration.Attributes;
-using System.Security.Cryptography.X509Certificates;
 
 namespace HRSA.Models
 {
@@ -51,7 +50,7 @@ namespace HRSA.Models
 
         public static HealPatient From(string dos, ECWOutgoingPatient src)
         {
-            string address = src.Address + ", " + src.City + ", " + src.State + "-" + src.ZipCode;
+            string address = src.Address.Trim() + ", " + src.City.Trim() + ", " + src.State.Trim() + "-" + src.ZipCode.Trim();
             string[] names = src.PatientName.Split(',');
 
             var patient = new HealPatient()
@@ -65,8 +64,8 @@ namespace HRSA.Models
                 DateOfBirth = src.DateOfBirth,
                 DL = string.Empty,
                 Gender = src.Gender,
-                LastName = names[0],
-                FirstName = names[1]
+                LastName = names[0].Trim(),
+                FirstName = names[1].Trim()
             };
 
             return patient;

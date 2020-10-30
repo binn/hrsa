@@ -84,24 +84,24 @@ namespace HRSA.Models
 
             var patient = new HRSAOutgoingPatient()
             {
-                BillingTIN = Global.MasterTIN,
-                FirstName = src.FirstName,
-                LastName = src.LastName,
+                BillingTIN = Global.MasterTIN.Trim(),
+                FirstName = src.FirstName.Trim(),
+                LastName = src.LastName.Trim(),
                 ServiceType = "Professional",
-                DateOfService = src.DateOfService,
-                DateOfAdmission = src.DateOfService,
-                DateOfDischarge = src.DateOfService,
+                DateOfService = src.DateOfService.Trim(),
+                DateOfAdmission = src.DateOfService.Trim(),
+                DateOfDischarge = src.DateOfService.Trim(),
                 MiddleInitial = string.Empty,
                 IDType = src.DL == "No ID" ? "No ID" : (src.DL == "Non-US ID" ? "No ID" : "State ID"),
-                IDNumber = src.DL == "No ID" ? string.Empty : (src.DL != "Non-US ID" ? src.DL : string.Empty),
-                DateOfBirth = src.DateOfBirth,
-                AccountNumber = src.AccountNumber,
-                Gender = src.Gender,
-                AddressLine1 = address[0],
+                IDNumber = src.DL == "No ID" ? string.Empty : (src.DL != "Non-US ID" ? src.DL.Trim() : string.Empty),
+                DateOfBirth = src.DateOfBirth.Trim(),
+                AccountNumber = src.AccountNumber.Trim(),
+                Gender = src.Gender.Trim(),
+                AddressLine1 = address[0].Trim(),
                 AddressLine2 = string.Empty,
-                City = address[1],
-                State = stzip[0],
-                Zip = stzip[1]
+                City = address[1].Trim(),
+                State = stzip[0].Trim(),
+                Zip = stzip[1].Trim()
             };
 
             return patient;

@@ -1,5 +1,6 @@
 ﻿using HRSA.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -58,6 +59,8 @@ namespace HRSA
                     return;
                 }
 
+                Clean(ecwDataBox.Text);
+                Clean(ecwRecordBox.Text);
                 var incomingPatients = CSV.Read<ECWIncomingPatient>(ecwRecordBox.Text);
                 var records = CSV.Read<ECWGenderPatient>(ecwDataBox.Text);
                 var patients = incomingPatients.Select(x => new ECWOutgoingPatient(x, records.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)));
@@ -71,6 +74,16 @@ namespace HRSA
                 var outgoing = patients.Select(x => HealPatient.From(dosBox.Text.Trim(), x));
                 CSV.Write(dialog.FileName, outgoing);
             }
+        }
+
+        private void Clean(string path)
+        {
+            List<string> lines = new List<string>();
+            foreach (var line in File.ReadAllLines(path))
+                if (!line.Contains("Report Criteria") && !line.Contains("Total Patients"))
+                    lines.Add(line);
+
+            File.WriteAllLines(path, lines);
         }
     }
 }
