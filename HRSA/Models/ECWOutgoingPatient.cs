@@ -13,7 +13,7 @@
             this.State = from.State;
             this.ZipCode = from.ZipCode;
             this.DateOfBirth = src.DateOfBirth;
-            this.Gender = src.DateOfBirth;
+            this.Gender = src.Gender;
         }
 
         public string AccountNumber { get; set; }

@@ -4,35 +4,35 @@ namespace HRSA.Models
 {
     public class HealPatient
     {
-        [Index(2)]
+        [Index(1)]
         [Name("Last name")]
         public string LastName { get; set; }
 
-        [Index(3)]
+        [Index(2)]
         [Name("First name")]
         public string FirstName { get; set; }
 
-        [Index(4)]
+        [Index(3)]
         [Name("DOB")]
         public string DateOfBirth { get; set; }
 
-        [Index(7)]
+        [Index(6)]
         [Name("Driver Lic/SS")]
         public string DL { get; set; }
 
-        [Index(8)]
+        [Index(7)]
         [Name("Submit Date")]
         public string SubmittedDate { get; set; }
 
-        [Index(6)]
+        [Index(10)]
         [Name("Address")]
         public string Address { get; set; }
 
-        [Index(9)]
+        [Index(8)]
         [Name("Subscriber ID")]
         public string SubscriberId { get; set; }
 
-        [Index(10)]
+        [Index(9)]
         [Name("Active Date")]
         public string ActiveDate { get; set; }
 
@@ -40,11 +40,11 @@ namespace HRSA.Models
         [Name("DOS")]
         public string DateOfService { get; set; }
 
-        [Index(1)]
+        [Index(5)]
         [Name("Acc #")]
         public string AccountNumber { get; set; }
 
-        [Index(5)]
+        [Index(4)]
         [Name("G")]
         public string Gender { get; set; }
 
