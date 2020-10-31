@@ -38,7 +38,7 @@ namespace HRSA
                 var records = CSV.Read<HRSAIncomingPatient>(hrsaDataBox.Text);
                 var incoming = CSV.Read<HealPatient>(healDataBox.Text);
                 var patients = incoming
-                    .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber))
+                    .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber && DateTime.Now > DateTime.Parse(r.DateOfService).AddDays(30)))
                     .Where(x => !records.Any(r => r.LastName == x.LastName && r.FirstName == x.FirstName 
                         && r.DateOfBirth == x.DateOfBirth && r.CleanGender == x.Gender)) // this could probably even be removed in the future
                     .Select(x => HRSAOutgoingPatient.From(x));

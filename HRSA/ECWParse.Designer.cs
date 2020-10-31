@@ -38,6 +38,9 @@
             this.closeBtn = new System.Windows.Forms.Button();
             this.dosBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.hrsaMemberBtn = new System.Windows.Forms.Button();
+            this.hsraMemberBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ecwRecordBox
@@ -69,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 64);
+            this.label2.Location = new System.Drawing.Point(10, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 13);
             this.label2.TabIndex = 3;
@@ -77,7 +80,7 @@
             // 
             // ecwPatientDataOpenFileBtn
             // 
-            this.ecwPatientDataOpenFileBtn.Location = new System.Drawing.Point(12, 78);
+            this.ecwPatientDataOpenFileBtn.Location = new System.Drawing.Point(13, 71);
             this.ecwPatientDataOpenFileBtn.Name = "ecwPatientDataOpenFileBtn";
             this.ecwPatientDataOpenFileBtn.Size = new System.Drawing.Size(108, 23);
             this.ecwPatientDataOpenFileBtn.TabIndex = 5;
@@ -87,14 +90,14 @@
             // 
             // ecwDataBox
             // 
-            this.ecwDataBox.Location = new System.Drawing.Point(126, 80);
+            this.ecwDataBox.Location = new System.Drawing.Point(127, 73);
             this.ecwDataBox.Name = "ecwDataBox";
             this.ecwDataBox.Size = new System.Drawing.Size(236, 20);
             this.ecwDataBox.TabIndex = 4;
             // 
             // generateBtn
             // 
-            this.generateBtn.Location = new System.Drawing.Point(186, 106);
+            this.generateBtn.Location = new System.Drawing.Point(187, 145);
             this.generateBtn.Name = "generateBtn";
             this.generateBtn.Size = new System.Drawing.Size(125, 23);
             this.generateBtn.TabIndex = 6;
@@ -104,7 +107,7 @@
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(317, 106);
+            this.closeBtn.Location = new System.Drawing.Point(318, 145);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(45, 23);
             this.closeBtn.TabIndex = 7;
@@ -114,7 +117,7 @@
             // 
             // dosBox
             // 
-            this.dosBox.Location = new System.Drawing.Point(51, 109);
+            this.dosBox.Location = new System.Drawing.Point(52, 148);
             this.dosBox.Name = "dosBox";
             this.dosBox.Size = new System.Drawing.Size(69, 20);
             this.dosBox.TabIndex = 8;
@@ -122,17 +125,46 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 111);
+            this.label3.Location = new System.Drawing.Point(10, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "DOS:";
             // 
+            // hrsaMemberBtn
+            // 
+            this.hrsaMemberBtn.Location = new System.Drawing.Point(13, 117);
+            this.hrsaMemberBtn.Name = "hrsaMemberBtn";
+            this.hrsaMemberBtn.Size = new System.Drawing.Size(108, 23);
+            this.hrsaMemberBtn.TabIndex = 12;
+            this.hrsaMemberBtn.Text = "Open File";
+            this.hrsaMemberBtn.UseVisualStyleBackColor = true;
+            this.hrsaMemberBtn.Click += new System.EventHandler(this.hrsaMemberBtn_Click);
+            // 
+            // hsraMemberBox
+            // 
+            this.hsraMemberBox.Location = new System.Drawing.Point(127, 119);
+            this.hsraMemberBox.Name = "hsraMemberBox";
+            this.hsraMemberBox.Size = new System.Drawing.Size(236, 20);
+            this.hsraMemberBox.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(183, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Select HRSA member data (optional):";
+            // 
             // ECWParse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 139);
+            this.ClientSize = new System.Drawing.Size(374, 180);
+            this.Controls.Add(this.hrsaMemberBtn);
+            this.Controls.Add(this.hsraMemberBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dosBox);
             this.Controls.Add(this.closeBtn);
@@ -162,5 +194,8 @@
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.TextBox dosBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button hrsaMemberBtn;
+        private System.Windows.Forms.TextBox hsraMemberBox;
+        private System.Windows.Forms.Label label4;
     }
 }
