@@ -14,6 +14,10 @@
             this.ZipCode = from.ZipCode;
             this.DateOfBirth = src.DateOfBirth;
             this.Gender = src.Gender;
+
+            string[] names = src.PatientName.Split(',');
+            LastName = names[0].Trim();
+            FirstName = names[1].Trim();
         }
 
         public string AccountNumber { get; set; }
@@ -24,5 +28,7 @@
         public string ZipCode { get; set; }
         public string DateOfBirth { get; set; }
         public string Gender { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

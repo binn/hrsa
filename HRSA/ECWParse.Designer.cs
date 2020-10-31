@@ -39,7 +39,7 @@
             this.dosBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.hrsaMemberBtn = new System.Windows.Forms.Button();
-            this.hsraMemberBox = new System.Windows.Forms.TextBox();
+            this.hrsaMemberBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -141,12 +141,12 @@
             this.hrsaMemberBtn.UseVisualStyleBackColor = true;
             this.hrsaMemberBtn.Click += new System.EventHandler(this.hrsaMemberBtn_Click);
             // 
-            // hsraMemberBox
+            // hrsaMemberBox
             // 
-            this.hsraMemberBox.Location = new System.Drawing.Point(127, 119);
-            this.hsraMemberBox.Name = "hsraMemberBox";
-            this.hsraMemberBox.Size = new System.Drawing.Size(236, 20);
-            this.hsraMemberBox.TabIndex = 11;
+            this.hrsaMemberBox.Location = new System.Drawing.Point(127, 119);
+            this.hrsaMemberBox.Name = "hrsaMemberBox";
+            this.hrsaMemberBox.Size = new System.Drawing.Size(236, 20);
+            this.hrsaMemberBox.TabIndex = 11;
             // 
             // label4
             // 
@@ -163,7 +163,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 180);
             this.Controls.Add(this.hrsaMemberBtn);
-            this.Controls.Add(this.hsraMemberBox);
+            this.Controls.Add(this.hrsaMemberBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dosBox);
@@ -195,7 +195,7 @@
         private System.Windows.Forms.TextBox dosBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button hrsaMemberBtn;
-        private System.Windows.Forms.TextBox hsraMemberBox;
+        private System.Windows.Forms.TextBox hrsaMemberBox;
         private System.Windows.Forms.Label label4;
     }
 }

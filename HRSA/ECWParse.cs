@@ -47,7 +47,7 @@ namespace HRSA
                 return;
             }
 
-            if(string.IsNullOrWhiteSpace(hsraMemberBox.Text))
+            if(string.IsNullOrWhiteSpace(hrsaMemberBox.Text))
             {
                 var wrn = MessageBox.Show("HRSA member data is not selected. This means duplicate patients could show up in the record.\nPress OK to continue generating H36 data.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (wrn == DialogResult.Cancel)
@@ -70,15 +70,14 @@ namespace HRSA
                 Clean(ecwRecordBox.Text);
                 var incomingPatients = CSV.Read<ECWIncomingPatient>(ecwRecordBox.Text);
                 var incomingDataRecords = CSV.Read<ECWGenderPatient>(ecwDataBox.Text);
-                List<HRSAIncomingPatient> records = string.IsNullOrWhiteSpace(hsraMemberBox.Text)
-                    ? new List<HRSAIncomingPatient>() : CSV.Read<HRSAIncomingPatient>(hsraMemberBox.Text).ToList();
+                List<HRSAIncomingPatient> records = string.IsNullOrWhiteSpace(hrsaMemberBox.Text)
+                    ? new List<HRSAIncomingPatient>() : CSV.Read<HRSAIncomingPatient>(hrsaMemberBox.Text).ToList();
 
                 var patients = incomingPatients
                     .Select(x => new ECWOutgoingPatient(x, incomingDataRecords.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)))
                     .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber && DateTime.Now > DateTime.Parse(r.DateOfService).AddDays(30)))
                     .Where(x => !records.Any(r => r.LastName == x.LastName && r.FirstName == x.FirstName
-                        && r.DateOfBirth == x.DateOfBirth && r.CleanGender == x.Gender)) // this could probably even be removed in the future
-                    .Select(x => HRSAOutgoingPatient.From(x));
+                        && r.DateOfBirth == x.DateOfBirth && r.CleanGender == x.Gender)); // this could probably even be removed in the future
 
                 if (patients.Count() != incomingPatients.Count())
                    MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
