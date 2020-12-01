@@ -42,5 +42,11 @@ namespace HRSA
         {
             this.masterTin.Text = "Master TIN: " + Global.ReadMasterTIN();
         }
+
+        private void ecwClaimBtn_Click(object sender, EventArgs e)
+        {
+            ClaimParse claimParse = new ClaimParse();
+            claimParse.Show();
+        }
     }
 }

@@ -33,6 +33,7 @@
             this.hrsaBatchButton = new System.Windows.Forms.Button();
             this.masterTin = new System.Windows.Forms.Label();
             this.masterTinButton = new System.Windows.Forms.Button();
+            this.ecwClaimBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ecwButton
@@ -87,11 +88,23 @@
             this.masterTinButton.UseVisualStyleBackColor = true;
             this.masterTinButton.Click += new System.EventHandler(this.masterTinButton_Click);
             // 
+            // ecwClaimBtn
+            // 
+            this.ecwClaimBtn.Font = new System.Drawing.Font("Segoe UI Semilight", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ecwClaimBtn.Location = new System.Drawing.Point(12, 284);
+            this.ecwClaimBtn.Name = "ecwClaimBtn";
+            this.ecwClaimBtn.Size = new System.Drawing.Size(452, 76);
+            this.ecwClaimBtn.TabIndex = 5;
+            this.ecwClaimBtn.Text = "Process ECW Claims";
+            this.ecwClaimBtn.UseVisualStyleBackColor = true;
+            this.ecwClaimBtn.Click += new System.EventHandler(this.ecwClaimBtn_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 288);
+            this.ClientSize = new System.Drawing.Size(476, 369);
+            this.Controls.Add(this.ecwClaimBtn);
             this.Controls.Add(this.masterTinButton);
             this.Controls.Add(this.masterTin);
             this.Controls.Add(this.hrsaBatchButton);
@@ -111,6 +124,7 @@
         private System.Windows.Forms.Button hrsaBatchButton;
         private System.Windows.Forms.Label masterTin;
         private System.Windows.Forms.Button masterTinButton;
+        private System.Windows.Forms.Button ecwClaimBtn;
     }
 }
 

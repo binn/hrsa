@@ -19,7 +19,7 @@ namespace HRSA
 
             foreach (var patient in patients)
             {
-                var data = memberData.FirstOrDefault(x => x.AccountNumber == patient.AccountNumber && x.DateOfService == patient.DateOfService);
+                var data = memberData.FirstOrDefault(x => x.AccountNumber == patient.AccountNumber && DateTime.Now < DateTime.Parse(x.DateOfService).AddDays(30));
                 if(data != null)
                 {
                     patient.SubscriberId = data.MemberID;

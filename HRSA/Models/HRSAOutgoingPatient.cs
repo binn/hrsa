@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System;
 using System.Linq;
 
 namespace HRSA.Models
@@ -80,31 +81,67 @@ namespace HRSA.Models
         public static HRSAOutgoingPatient From(HealPatient src)
         {
             var address = src.Address.Split(',').Select(x => x.Trim()).ToArray();
-            string[] stzip = address[2].Split('-'); // address requires a certain format
+            string[] street = address.Take(address.Length - 2).ToArray();
+            string city = address.Skip(address.Length - 2).Take(1).FirstOrDefault();
+            string[] stzip = address.LastOrDefault().Split('-'); // address requires a certain format
+
+            if (city == "Blank")
+            {
+                street = new[] { "1360 Star Ct", "STE T1" };
+                city = "Plano";
+                stzip = new[] { "TX", "75074" };
+            }
 
             var patient = new HRSAOutgoingPatient()
             {
                 BillingTIN = Global.MasterTIN.Trim(),
-                FirstName = src.FirstName.Trim(),
-                LastName = src.LastName.Trim(),
+                FirstName = new string(Validate(src.FirstName).Take(20).ToArray()),
+                LastName = new string(Validate(src.LastName).Take(30).ToArray()),
                 ServiceType = "Professional",
                 DateOfService = src.DateOfService.Trim(),
                 DateOfAdmission = src.DateOfService.Trim(),
                 DateOfDischarge = src.DateOfService.Trim(),
                 MiddleInitial = string.Empty,
-                IDType = src.DL == "No ID" ? "No ID" : (src.DL == "Non-US ID" ? "No ID" : "State ID"),
-                IDNumber = src.DL == "No ID" ? string.Empty : (src.DL != "Non-US ID" ? src.DL.Trim() : string.Empty),
+                IDType = ParseDLType(src.DL),
+                IDNumber = ParseDL(src.DL),
                 DateOfBirth = src.DateOfBirth.Trim(),
                 AccountNumber = src.AccountNumber.Trim(),
                 Gender = src.Gender.Trim(),
-                AddressLine1 = address[0].Trim(),
+                AddressLine1 = string.Join(",", street).Trim(),
                 AddressLine2 = string.Empty,
-                City = address[1].Trim(),
+                City = city.Trim(),
                 State = stzip[0].Trim(),
                 Zip = stzip[1].Trim()
             };
 
             return patient;
+        }
+
+        private static string Validate(string name)
+        {
+            return name.ToUpper().Trim().Replace("?", "").Replace(".", "").Trim();
+        }
+
+        private static string ParseDLType(string dl)
+        {
+            if (string.IsNullOrWhiteSpace(dl))
+                return "No ID";
+
+            if (dl.Trim().ToUpper() == "NO ID")
+                return "No ID";
+            else
+                return "State ID";
+        }
+
+        private static string ParseDL(string dl)
+        {
+            if (string.IsNullOrWhiteSpace(dl))
+                return string.Empty;
+
+            if (dl.Trim().ToUpper() == "NO ID")
+                return string.Empty;
+            else
+                return dl.Trim().ToUpper().Replace("-", "").Trim();
         }
     }
 }

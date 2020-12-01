@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClaimParse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClaimParse.Designer.cs">
+      <DependentUpon>ClaimParse.cs</DependentUpon>
+    </Compile>
     <Compile Include="CSV.cs" />
     <Compile Include="ECWParse.cs">
       <SubType>Form</SubType>
@@ -84,6 +91,7 @@
     <Compile Include="HRSAParse.Designer.cs">
       <DependentUpon>HRSAParse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ECWIncomingClaim.cs" />
     <Compile Include="Models\ECWOutgoingPatient.cs" />
     <Compile Include="Models\ECWIncomingPatient.cs" />
     <Compile Include="Models\HealPatient.cs" />
@@ -97,6 +105,9 @@
     <Compile Include="SetMasterTIN.Designer.cs">
       <DependentUpon>SetMasterTIN.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClaimParse.resx">
+      <DependentUpon>ClaimParse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ECWParse.resx">
       <DependentUpon>ECWParse.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +128,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SetMasterTIN.resx">
       <DependentUpon>SetMasterTIN.cs</DependentUpon>

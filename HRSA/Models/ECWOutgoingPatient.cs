@@ -15,7 +15,7 @@
             this.DateOfBirth = src.DateOfBirth;
             this.Gender = src.Gender;
 
-            string[] names = src.PatientName.Split(',');
+            string[] names = from.PatientName.Split(',');
             LastName = names[0].Trim();
             FirstName = names[1].Trim();
         }

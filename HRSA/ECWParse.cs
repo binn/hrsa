@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace HRSA
@@ -75,18 +76,17 @@ namespace HRSA
 
                 var patients = incomingPatients
                     .Select(x => new ECWOutgoingPatient(x, incomingDataRecords.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)))
-                    .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber && DateTime.Now > DateTime.Parse(r.DateOfService).AddDays(30)))
-                    .Where(x => !records.Any(r => r.LastName == x.LastName && r.FirstName == x.FirstName
-                        && r.DateOfBirth == x.DateOfBirth && r.CleanGender == x.Gender)); // this could probably even be removed in the future
-
-                if (patients.Count() != incomingPatients.Count())
-                   MessageBox.Show("Patient record mismatch. Please export correctly before trying again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber && DateTime.Now < DateTime.Parse(r.DateOfService).AddDays(30)));
+                //    .Where(x => !records.Any(r => r.LastName == x.LastName && r.FirstName == x.FirstName
+                //        && r.DateOfBirth == x.DateOfBirth && r.CleanGender == x.Gender)); // this could probably even be removed in the future
 
                 if (!File.Exists(dialog.FileName))
                     File.Create(dialog.FileName).Close();
 
                 var outgoing = patients.Select(x => HealPatient.From(dosBox.Text.Trim(), x));
                 CSV.Write(dialog.FileName, outgoing);
+
+                MessageBox.Show("Saved " + patients.Count() + "/" + incomingPatients.Count() + " patients.\n" + (incomingPatients.Count() - patients.Count()) + " duplicates removed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -102,7 +102,12 @@ namespace HRSA
 
         private void hrsaMemberBtn_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog dialog = new OpenFileDialog();
+            var result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                hrsaMemberBox.Text = dialog.FileName;
+            }
         }
     }
 }
