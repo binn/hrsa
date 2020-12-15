@@ -1,9 +1,15 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System;
 
 namespace HRSA.Models
 {
     public class HRSAIncomingPatient
     {
+        public HRSAIncomingPatient()
+        {
+
+        }
+
         [Index(0)]
         [Name("Submission Date")]
         public string SubmissionDate { get; set; }
@@ -70,5 +76,8 @@ namespace HRSA.Models
 
         [Ignore]
         public string CleanGender => new string(new char[] { this.Gender != null ? this.Gender[0] : 'U' });
+
+        [Ignore]
+        public DateTime DOS { get; set; }
     }
 }
