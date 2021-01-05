@@ -41,6 +41,9 @@
             this.hrsaMemberBtn = new System.Windows.Forms.Button();
             this.hrsaMemberBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.setmoreBtn = new System.Windows.Forms.Button();
+            this.setmoreBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ecwRecordBox
@@ -97,7 +100,7 @@
             // 
             // generateBtn
             // 
-            this.generateBtn.Location = new System.Drawing.Point(187, 145);
+            this.generateBtn.Location = new System.Drawing.Point(186, 192);
             this.generateBtn.Name = "generateBtn";
             this.generateBtn.Size = new System.Drawing.Size(125, 23);
             this.generateBtn.TabIndex = 6;
@@ -107,7 +110,7 @@
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(318, 145);
+            this.closeBtn.Location = new System.Drawing.Point(317, 192);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(45, 23);
             this.closeBtn.TabIndex = 7;
@@ -117,7 +120,7 @@
             // 
             // dosBox
             // 
-            this.dosBox.Location = new System.Drawing.Point(52, 148);
+            this.dosBox.Location = new System.Drawing.Point(51, 194);
             this.dosBox.Name = "dosBox";
             this.dosBox.Size = new System.Drawing.Size(69, 20);
             this.dosBox.TabIndex = 8;
@@ -125,7 +128,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 150);
+            this.label3.Location = new System.Drawing.Point(9, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 9;
@@ -157,11 +160,40 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Select HRSA member data (optional):";
             // 
+            // setmoreBtn
+            // 
+            this.setmoreBtn.Location = new System.Drawing.Point(12, 163);
+            this.setmoreBtn.Name = "setmoreBtn";
+            this.setmoreBtn.Size = new System.Drawing.Size(108, 23);
+            this.setmoreBtn.TabIndex = 15;
+            this.setmoreBtn.Text = "Open File";
+            this.setmoreBtn.UseVisualStyleBackColor = true;
+            this.setmoreBtn.Click += new System.EventHandler(this.setmoreBtn_Click);
+            // 
+            // setmoreBox
+            // 
+            this.setmoreBox.Location = new System.Drawing.Point(126, 165);
+            this.setmoreBox.Name = "setmoreBox";
+            this.setmoreBox.Size = new System.Drawing.Size(236, 20);
+            this.setmoreBox.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 149);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(152, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Select Setmore data (optional):";
+            // 
             // ECWParse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 180);
+            this.ClientSize = new System.Drawing.Size(374, 224);
+            this.Controls.Add(this.setmoreBtn);
+            this.Controls.Add(this.setmoreBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.hrsaMemberBtn);
             this.Controls.Add(this.hrsaMemberBox);
             this.Controls.Add(this.label4);
@@ -197,5 +229,8 @@
         private System.Windows.Forms.Button hrsaMemberBtn;
         private System.Windows.Forms.TextBox hrsaMemberBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button setmoreBtn;
+        private System.Windows.Forms.TextBox setmoreBox;
+        private System.Windows.Forms.Label label5;
     }
 }

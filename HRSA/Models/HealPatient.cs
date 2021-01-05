@@ -56,13 +56,13 @@ namespace HRSA.Models
             var patient = new HealPatient()
             {
                 Address = address,
-                SubmittedDate = string.Empty,
+                SubmittedDate = src.SubmitDate ?? string.Empty,
                 SubscriberId = string.Empty,
                 DateOfService = dos,
                 AccountNumber = src.AccountNumber,
                 ActiveDate = string.Empty,
-                DateOfBirth = src.DateOfBirth,
-                DL = string.Empty,
+                DateOfBirth = src.DateOfBirth.ToShortDateString(),
+                DL = src.DL ?? string.Empty,
                 Gender = src.Gender,
                 LastName = names[0].Trim(),
                 FirstName = names[1].Trim()

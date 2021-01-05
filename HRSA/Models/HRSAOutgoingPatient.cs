@@ -85,7 +85,7 @@ namespace HRSA.Models
             string city = address.Skip(address.Length - 2).Take(1).FirstOrDefault();
             string[] stzip = address.LastOrDefault().Split('-'); // address requires a certain format
 
-            if (city == "Blank")
+            if (street[0] == "Blank" || city == "Blank")
             {
                 street = new[] { "1360 Star Ct", "STE T1" };
                 city = "Plano";

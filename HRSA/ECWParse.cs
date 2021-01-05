@@ -1,6 +1,7 @@
 ﻿using HRSA.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -74,6 +75,9 @@ namespace HRSA
                 List<HRSAIncomingPatient> records = string.IsNullOrWhiteSpace(hrsaMemberBox.Text)
                     ? new List<HRSAIncomingPatient>() : CSV.Read<HRSAIncomingPatient>(hrsaMemberBox.Text).ToList();
 
+                List<SetmorePatient> setmorePatients = string.IsNullOrWhiteSpace(setmoreBox.Text)
+                    ? new List<SetmorePatient>() : CSV.Read<SetmorePatient>(setmoreBox.Text).ToList();
+
                 var patients = incomingPatients
                     .Select(x => new ECWOutgoingPatient(x, incomingDataRecords.FirstOrDefault(r => r.AccountNumber == x.AccountNumber)))
                     .Where(x => !records.Any(r => r.AccountNumber == x.AccountNumber && DateTime.Now < DateTime.Parse(r.DateOfService).AddDays(30)));
@@ -83,12 +87,48 @@ namespace HRSA
                 if (!File.Exists(dialog.FileName))
                     File.Create(dialog.FileName).Close();
 
-                var outgoing = patients.Select(x => HealPatient.From(dosBox.Text.Trim(), x));
+                setmorePatients = setmorePatients
+                    .Where(x => x.ResourceName.Contains("UNINSURED"))
+                    .Select(x => x.Clean()).ToList();
+
+                List<ECWOutgoingPatient> finalPatients = new List<ECWOutgoingPatient>();
+                foreach (var patient in patients)
+                {
+                    var pt = setmorePatients.FirstOrDefault(x => 
+                           x.Gender == patient.Gender
+                        && x.DateOfBirth.Date == patient.DateOfBirth.Date
+                        && x.Phone.Trim() == patient.PhoneNumber.Trim()
+                        && Percent(x.CustomerName, patient.FirstName, patient.LastName) >= 55.00);
+
+                    if (pt == null)
+                    {
+                        finalPatients.Add(patient);
+                        continue;
+                    }
+
+                    patient.DL = pt.DL;
+                    patient.SubmitDate = $"{pt.CustomerName.ToUpper().Trim()} - {pt.DateOfBirth.Date.ToShortDateString()}";
+                    finalPatients.Add(patient);
+                }
+
+                var outgoing = finalPatients.Select(x => HealPatient.From(dosBox.Text.Trim(), x));
                 CSV.Write(dialog.FileName, outgoing);
 
                 MessageBox.Show("Saved " + patients.Count() + "/" + incomingPatients.Count() + " patients.\n" + (incomingPatients.Count() - patients.Count()) + " duplicates removed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private double Percent(string customerName, string firstName, string lastName)
+        {
+            string name = firstName.Trim().ToUpper().Split(' ')[0] + " " + lastName.Trim().ToUpper().Split(' ')[0];
+
+            int distance = LevenshteinDistance(customerName, name);
+            int longerLength = customerName.Length > name.Length ? customerName.Length : name.Length;
+
+            double percent = (((double)longerLength - (double)distance) / (double)longerLength) * 100.00;
+            Trace.WriteLine($"P: {percent}, N1: {name}, N2: {customerName}");
+            return percent;
+        } 
 
         private void Clean(string path)
         {
@@ -108,6 +148,61 @@ namespace HRSA
             {
                 hrsaMemberBox.Text = dialog.FileName;
             }
+        }
+
+        private void setmoreBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            var result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                setmoreBox.Text = dialog.FileName;
+            }
+        }
+
+        public static int LevenshteinDistance(string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            // Step 1
+            if (n == 0)
+            {
+                return m;
+            }
+
+            if (m == 0)
+            {
+                return n;
+            }
+
+            // Step 2
+            for (int i = 0; i <= n; d[i, 0] = i++)
+            {
+            }
+
+            for (int j = 0; j <= m; d[0, j] = j++)
+            {
+            }
+
+            // Step 3
+            for (int i = 1; i <= n; i++)
+            {
+                //Step 4
+                for (int j = 1; j <= m; j++)
+                {
+                    // Step 5
+                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
+
+                    // Step 6
+                    d[i, j] = Math.Min(
+                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
+                        d[i - 1, j - 1] + cost);
+                }
+            }
+            // Step 7
+            return d[n, m];
         }
     }
 }

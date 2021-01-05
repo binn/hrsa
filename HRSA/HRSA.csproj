@@ -97,6 +97,7 @@
     <Compile Include="Models\HealPatient.cs" />
     <Compile Include="Models\HRSAIncomingPatient.cs" />
     <Compile Include="Models\HRSAOutgoingPatient.cs" />
+    <Compile Include="Models\SetmorePatient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetMasterTIN.cs">
